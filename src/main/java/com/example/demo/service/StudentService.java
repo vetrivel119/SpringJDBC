@@ -14,7 +14,7 @@ import java.util.List;
 public class StudentService {
 
     @Autowired
-    StudentRepository sr;
+    private StudentRepository sr;
 
     public Student createStudent(Student student) throws IllegalAccessException {
         if(student.getAge() < 15 || student.getAge() > 30){
