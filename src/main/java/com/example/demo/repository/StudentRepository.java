@@ -2,13 +2,11 @@ package com.example.demo.repository;
 
 import com.example.demo.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -67,9 +65,9 @@ public class StudentRepository {
         return jdbcTemplate.query(sql,StudentMapper,"%"+name+"%");
     }
 
-    public int update(Student student){
+    public int update(Student student , Integer id){
         String sql = "UPDATE students SET name = ?,email=?,age=?,grade=? WHERE id = ?";
-        return jdbcTemplate.update(sql, student.getName(), student.getEmail(), student.getAge(), student.getGrade(), student.getId());
+        return jdbcTemplate.update(sql, student.getName(), student.getEmail(), student.getAge(), student.getGrade(), id);
     }
 
     public int deletebyId(Integer id){

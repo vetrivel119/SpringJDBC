@@ -18,7 +18,7 @@ public class StudentService {
 
     public Student createStudent(Student student) throws IllegalAccessException {
         if(student.getAge() < 15 || student.getAge() > 30){
-            throw new IllegalAccessException("Age must be beyween 15 and 30");
+            throw new IllegalAccessException("Age must be between 15 and 30");
         }
 
         if(sr.existsByEmail(student.getEmail())){
@@ -26,7 +26,7 @@ public class StudentService {
         }
 
         String grade = student.getGrade().toUpperCase();
-        if("ABCDF".contains(grade)){
+        if(!grade.matches("[ABCDF]")){
             throw new IllegalAccessException("Grade must be A B C D F");
         }
         student.setGrade(grade);
@@ -35,7 +35,9 @@ public class StudentService {
 
         System.out.println("Student created with Id :" + student.getId());
 
-        return student;
+        Student s1 = sr.findById(id);
+
+        return s1;
     }
 
     public List<Student> findAll(){
@@ -74,7 +76,7 @@ public class StudentService {
             throw new IllegalAccessException("Student not found with Id: "+id);
         }
 
-        return sr.update(student);
+        return sr.update(student,id);
     }
 
     public int delete(Integer id) throws IllegalAccessException {
